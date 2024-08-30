@@ -1,5 +1,5 @@
 -- \c postgres;
 
-DROP DATABASE IF EXISTS teachers_assistant_db;
+DROP DATABASE IF EXISTS TA_db;
 
-CREATE DATABASE teachers_assistant_db;
+CREATE DATABASE TA_db;

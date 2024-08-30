@@ -12,6 +12,10 @@ Student.init(
                 len: 2
             }
         },
+        birth_date: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
         grade: {
             type: DataTypes.STRING,
             allowNull: false
