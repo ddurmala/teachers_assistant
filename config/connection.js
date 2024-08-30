@@ -5,8 +5,11 @@ let sequelize;
 
 if (process.env.PG_URL) {
     sequelize = new Sequelize(process.env.PG_URL, {
-        ssl: {
-            rejectUnauthorized: false
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
         }
     });
 } else {
