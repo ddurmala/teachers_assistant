@@ -4,7 +4,11 @@ require('dotenv').config();
 let sequelize;
 
 if (process.env.PG_URL) {
-    sequelize = new Sequelize(process.env.PG_URL);
+    sequelize = new Sequelize(process.env.PG_URL, {
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
 } else {
     sequelize = new Sequelize(
         process.env.DB_NAME,
