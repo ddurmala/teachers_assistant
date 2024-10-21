@@ -5,9 +5,15 @@ const { Student } = require('../models');
 router.post('/add', async (req, res) => {
   const formData = req.body;
   try {
+    const specialEd = await Special_ed.create({
+      iep_url: formData.iep_url,
+      notes: formData.notes,
+    });
+
     await Student.create({
       ...formData,
-      teacherId: req.session.teacher_id
+      teacherId: req.session.teacher_id,
+      special_ed_id: specialEd.id
     })
     res.redirect('/dashboard')
   } catch (error) {
@@ -32,7 +38,17 @@ router.put('/edit/:student_id', async (req, res) => {
       returning: true,
       plain: true
     }
-  )
+  );
+
+  if (req.body.special_ed_id) {
+    await Special_ed.update({
+      iep_url: req.body.iep_url,
+      notes: req.body.notes,
+    }, {
+      where: { id: req.body.special_ed_id }
+    });
+  }
+
   res.redirect('/dashboard')
 })
 

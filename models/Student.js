@@ -25,6 +25,14 @@ Student.init(
         },
         notes: {
             type: DataTypes.TEXT
+        },
+        special_ed_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'special_ed',
+                key: 'id'
+            },
+            allowNull: true,
         }
     },
     {
