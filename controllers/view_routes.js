@@ -1,28 +1,5 @@
 const router = require('express').Router();
-const { Teacher, Student } = require('../models');
-
-
-// router.get('/', async (req, res) => {
-//     res.render('homepage');
-// })
-
-// router.get('/register', async (req, res) => {
-//     res.render('register');
-// })
-
-// router.get('/login', async (req, res) => {
-//     res.render('login');
-// })
-
-// router.get('/dashboard', async (req, res) => {
-//     res.render('dashboard');
-// })
-
-// router.get('/student_profile', async (req, res) => {
-//     res.render('student_profile');
-// })
-
-
+const { Teacher, Student, Special_ed } = require('../models');
 
 function redirectIfLoggedIn(req, res, next) {
   if (req.session.teacher_id) {
@@ -70,15 +47,22 @@ router.get('/register', redirectIfLoggedIn, (req, res) => {
   delete req.session.errors;
 });
 
+
 // Student Page Route
 router.get('/dashboard', redirectGuest, async (req, res) => {
+
   const teacher = await Teacher.findByPk(req.session.teacher_id, {
     attributes: ['name'],
-    include: Student
+    include: {
+      model: Student,
+      include: [Special_ed]
+    }
   });
 
+  console.log("Teacher with students:", teacher ? teacher.get({ plain: true }) : null);
+
   res.render('dashboard', {
-    teacher: teacher.get({ plain: true }),
+    teacher: teacher ? teacher.get({ plain: true }) : null,
     title: 'Teacher Assistant - Student',
     user_page: true,
     dashboard: true
@@ -109,7 +93,7 @@ router.get('/edit/:student_id', redirectGuest, async (req, res) => {
   res.render('edit', {
     user: teacher.get({ plain: true }),
     title: 'Teacher Assistant - Search',
-    student: student.get({ plain: true}),
+    student: student.get({ plain: true }),
     user_page: true,
     search: true
   });

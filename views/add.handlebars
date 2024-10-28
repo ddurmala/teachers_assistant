@@ -30,6 +30,23 @@
         </div>
     </div>
 
+    {{!-- Special Ed Section --}}
+
+    <div class="field">
+        <label class="checkbox">
+            <input type="checkbox" id="special_ed" name="special_ed" value="true" onchange="toggleIEPField()">
+            Special Ed
+        </label>
+    </div>
+
+    <!-- Conditional IEP Link Input Field (initially hidden) -->
+    <div class="field" id="iep_link_container" style="display: none;">
+        <label class="label">IEP Link:</label>
+        <div class="control">
+            <input name="iep_url" class="input" type="url" placeholder="Link to student's IEP">
+        </div>
+    </div>
+
     <div class="field">
         <label class="label">Things to Note about Student:</label>
         <div class="control">
@@ -46,3 +63,13 @@
         </div>
     </div>
 </form>
+
+{{!-- JavaScript function to toggle IEP field visibility --}}
+
+<script>
+    function toggleIEPField() {
+        const iepField = document.getElementById('iep_link_container');
+        const specialEdCheckbox = document.getElementById('special_ed');
+        iepField.style.display = specialEdCheckbox.checked ? 'block' : 'none';
+    }
+</script>

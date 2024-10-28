@@ -7,9 +7,14 @@ Teacher.hasMany(Student);
 
 Student.belongsTo(Teacher);
 
-Special_ed.hasOne(Student, { foreignKey: 'special_ed_id' });
+Special_ed.hasOne(Student, {
+    foreignKey: 'special_ed_id',
+    onDelete: 'CASCADE'
+});
 
-Student.belongsTo(Special_ed, { foreignKey: 'special_ed_id' });
+Student.belongsTo(Special_ed, {
+    foreignKey: 'special_ed_id'
+});
 
 
 module.exports = { Teacher, Student, Special_ed };

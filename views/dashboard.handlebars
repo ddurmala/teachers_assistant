@@ -11,6 +11,19 @@
                 <p><span class="has-text-weight-bold">Grade:</span> {{grade}}</p>
                 <p><span class="has-text-weight-bold">Bus Number:</span> {{#if bus_number}}{{bus_number}}{{else}} N/A
                     {{/if}}</p>
+
+                {{#if special_ed}}
+
+                <h4 class="is-size-6 has-text-weight-bold">
+                    <span class="icon"><i class="fas fa-check-circle"></i></span> Special Ed
+                </h4>
+
+                <p><span class="has-text-weight-bold">IEP Link:</span>
+                    <a href="{{special_ed.iep_url}}" target="_blank">{{special_ed.iep_url}}</a>
+                </p>
+                <p><span class="has-text-weight-bold">Notes:</span> {{special_ed.notes}}</p>
+                {{/if}}
+
                 <p><span class="has-text-weight-bold">Teacher Notes:</span> {{#if notes}}{{notes}}{{else}} None {{/if}}
                 </p>
             </div>
